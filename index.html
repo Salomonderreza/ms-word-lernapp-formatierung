@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Word-Kompetenztrainer – Programm 2, Baustein D (Zeichenformatierung)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <aside class="missionpanel">
+    <div class="app-title">Zeichenformatierung</div>
+    <div class="brand">
+      <span class="brand-num" id="brandNum">D</span>
+      <span class="brand-name" id="familyLabel">Zeichenformatierung</span>
+    </div>
+
+    <div class="progress">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="progress-label" id="progressLabel">Mission 1 / 39</span>
+    </div>
+
+    <div id="panelBody"><!-- Erklärung / Demo / Aufgabe – wird von engine.js gerendert --></div>
+  </aside>
+
+  <main class="wordwindow">
+    <div class="titlebar">
+      <span class="titlebar-dot"></span>
+      <span class="titlebar-name" id="docName">Übungsdokument.docx</span>
+    </div>
+
+    <!-- Formatierungs-Ribbon: entspricht der Gruppe "Schriftart" auf der
+         Registerkarte "Start" in echtem Word -->
+    <div class="ribbon" id="ribbon">
+      <div class="ribbon-group">
+        <button type="button" class="rbtn rbtn-text" id="btn-fett" title="Fett (Strg+Umschalt+F)"><b>F</b></button>
+        <button type="button" class="rbtn rbtn-text" id="btn-kursiv" title="Kursiv (Strg+Umschalt+K)"><i>K</i></button>
+        <button type="button" class="rbtn rbtn-text" id="btn-unterstrichen" title="Unterstrichen (Strg+Umschalt+U)"><u>U</u></button>
+      </div>
+
+      <div class="ribbon-group" id="groupEffekte">
+        <span class="ribbon-label">Effekte</span>
+        <button type="button" class="rbtn rbtn-text" id="btn-durchgestrichen" title="Durchgestrichen"><s>ab</s></button>
+        <button type="button" class="rbtn rbtn-text" id="btn-hochgestellt" title="Hochgestellt">x²</button>
+        <button type="button" class="rbtn rbtn-text" id="btn-tiefgestellt" title="Tiefgestellt">x₂</button>
+        <button type="button" class="rbtn rbtn-text" id="btn-grossbuchstaben" title="Großbuchstaben (Effekt)">AA</button>
+        <button type="button" class="rbtn rbtn-text" id="btn-kapitaelchen" title="Kapitälchen" style="font-variant: small-caps;">Ab</button>
+        <button type="button" class="rbtn rbtn-text" id="btn-doppelt-durchgestrichen" title="Doppelt durchgestrichen" style="text-decoration: line-through double;">ab</button>
+      </div>
+
+      <div class="ribbon-group" id="groupFarbe">
+        <span class="ribbon-label">Schriftfarbe</span>
+        <div class="swatch-row">
+          <button type="button" class="swatch" id="farbe-rot" data-color="#C0392B" style="--sw:#C0392B" title="Rot"></button>
+          <button type="button" class="swatch" id="farbe-blau" data-color="#1F5FA8" style="--sw:#1F5FA8" title="Blau"></button>
+          <button type="button" class="swatch" id="farbe-gruen" data-color="#227A4F" style="--sw:#227A4F" title="Grün"></button>
+          <button type="button" class="swatch" id="farbe-schwarz" data-color="#2B3440" style="--sw:#2B3440" title="Schwarz (Standard)"></button>
+        </div>
+      </div>
+
+      <div class="ribbon-group" id="groupMarker">
+        <span class="ribbon-label">Hervorhebung</span>
+        <div class="swatch-row">
+          <button type="button" class="swatch" id="marker-gelb" data-color="#FCE49A" style="--sw:#FCE49A" title="Gelb"></button>
+          <button type="button" class="swatch" id="marker-gruen" data-color="#B7E3C4" style="--sw:#B7E3C4" title="Grün"></button>
+          <button type="button" class="swatch" id="marker-blau" data-color="#BBD8F0" style="--sw:#BBD8F0" title="Blau"></button>
+          <button type="button" class="swatch swatch-none" id="marker-keine" data-color="transparent" title="Keine"></button>
+        </div>
+      </div>
+
+      <div class="ribbon-group" id="groupSchriftart">
+        <span class="ribbon-label">Schriftart</span>
+        <button type="button" class="rbtn rbtn-font" id="font-serifen" data-font="Georgia, 'Source Serif 4', serif" style="font-family: Georgia, serif;">Serifen</button>
+        <button type="button" class="rbtn rbtn-font" id="font-serifenlos" data-font="Arial, Helvetica, sans-serif" style="font-family: Arial, sans-serif;">Serifenlos</button>
+        <button type="button" class="rbtn rbtn-font" id="font-schreibmaschine" data-font="'Courier New', monospace" style="font-family: 'Courier New', monospace;">Schreibmasch.</button>
+      </div>
+
+      <div class="ribbon-group" id="groupGroesse">
+        <span class="ribbon-label">Schriftgröße</span>
+        <button type="button" class="rbtn rbtn-size" id="groesse-klein" data-size="14">Klein</button>
+        <button type="button" class="rbtn rbtn-size" id="groesse-normal" data-size="17">Normal</button>
+        <button type="button" class="rbtn rbtn-size" id="groesse-gross" data-size="24">Groß</button>
+        <button type="button" class="rbtn rbtn-size" id="groesse-sehrgross" data-size="32">Sehr groß</button>
+      </div>
+
+      <div class="ribbon-group">
+        <button type="button" class="rbtn" id="btn-entfernen" title="Formatierung entfernen">⌫ Format</button>
+      </div>
+    </div>
+
+    <div class="pagewrap">
+      <div class="page" id="page">
+        <div class="editor" id="editor" contenteditable="false" spellcheck="false"></div>
+      </div>
+    </div>
+
+    <div class="keyboarddock" id="keyboardDock" hidden>
+      <div class="keyboarddock-label">Diese Tasten brauchst du:</div>
+      <div id="keyboardSvgHost"></div>
+    </div>
+  </main>
+</div>
+
+<script src="engine.js"></script>
+<script src="missionen.js"></script>
+</body>
+</html>
